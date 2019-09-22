@@ -13,6 +13,7 @@ Play with the server to find critical load. To emulate client, you may run `npm 
 • We want to deploy this app and all required dependencies in a easiest way. Docker/compose is a good choice.
 • We want to collect as much logs as possible in a unified way, in centralized place. Main goal here is to not miss something important and discover them easily during post-mortem.
 • We want to monitor our infrastructure and get notified if something goes probably wrong. Simple email alert is a good choice.
+• We want to know which endpoints are used — path and HTTP-response code are enough.
 
 ## What you need to do
 • Dockerize an app and run it together with MongoDB via docker-compose.

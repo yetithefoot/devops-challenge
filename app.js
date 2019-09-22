@@ -29,18 +29,22 @@ if (!process.env.MONGODB_URL) {
 
 	app.use(async (ctx, next) => {
 		const collection = db.collection('api-calls');
+
+		const start = Date.now();
 		await collection.insert({
 			appName: app.name,
 			timestamp: new Date(),
 			method: ctx.method,
 			url: ctx.url
 		});
+		ctx.mongoOpTimeMs = Date.now() - start;
+		
 		await next();
 	});
 
 	app.use(async ctx => {
-		ctx.set('X-Response-Time', `${ctx.responseTimeMs}ms`);
-		ctx.status = 200;
+		// emulate server error, just for fun
+		ctx.status = generateRandomizedResponseCode(ctx);
 	});
 
 	app.listen(app.port);
@@ -48,4 +52,10 @@ if (!process.env.MONGODB_URL) {
 })();
 
 
+function generateRandomizedResponseCode(ctx) {
+	if (ctx.responseTimeMs > 300) return 528;
+	if (ctx.mongoOpTimeMs > 100) return 529;
+	if (Math.random() > 0.95) return 500;
+	else return 200;
+}
 
