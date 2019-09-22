@@ -1,0 +1,27 @@
+{
+	"sourcePort": 3000,
+	"targetDeactivationDuration": 5000,
+	"stickiness": false,
+	"targets": [
+		{
+			"host": "127.0.0.1",
+			"port": 3001
+		},
+		{
+			"host": "127.0.0.1",
+			"port": 3002
+		},
+		{
+			"host": "127.0.0.1",
+			"port": 3003
+		},
+		{
+			"host": "127.0.0.1",
+			"port": 3004
+		},
+		{
+			"host": "127.0.0.1",
+			"port": 3005
+		}
+	]
+}
