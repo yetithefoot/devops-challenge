@@ -1,20 +1,11 @@
-const argv = require('minimist')(process.argv.slice(2));
-if (!argv.port) {
-	console.error(`--port isn't specified`);
-	process.exit(1);
-}
-
-if (!process.env.MONGODB_URL) {
-	console.error(`Environment variable MONGODB_URL isn't specified`, process.env.MONGODB_URL);
-	process.exit(1);
-}
+const { port, dburl } = require('./config');
 
 (async () => {
-	const db = await require('./db')(process.env.MONGODB_URL);
+	const { logRequest } = await require('./db')(dburl);
 	const Koa = require('koa');
 	const app = new Koa();
-	app.port = argv.port;
-	app.name = `app-${argv.port}`;
+
+	app.name = makeAppName({port});
 
 	app.use(async (ctx, next) => {
 		await next();
@@ -28,10 +19,8 @@ if (!process.env.MONGODB_URL) {
 	});
 
 	app.use(async (ctx, next) => {
-		const collection = db.collection('api-calls');
-
 		const start = Date.now();
-		await collection.insert({
+		await logRequest({
 			appName: app.name,
 			timestamp: new Date(),
 			method: ctx.method,
@@ -43,19 +32,27 @@ if (!process.env.MONGODB_URL) {
 	});
 
 	app.use(async ctx => {
-		// emulate server error, just for fun
-		ctx.status = generateRandomizedResponseCode(ctx);
+		ctx.status = generateChaoticalResponseCode(ctx);
 	});
 
-	app.listen(app.port);
-	console.log(`server '${app.name}' is listening on port ${app.port}`);
+	app.listen(port);
+	console.log(`Server '${app.name}' is listening on port ${port}`);
 })();
 
 
-function generateRandomizedResponseCode(ctx) {
+/**
+ * Emulate some server errors, just for fun
+ */
+function generateChaoticalResponseCode(ctx) {
 	if (ctx.responseTimeMs > 300) return 528;
 	if (ctx.mongoOpTimeMs > 100) return 529;
 	if (Math.random() > 0.95) return 500;
 	else return 200;
 }
 
+/**
+ * Make app name based on passed app arguments
+ */
+function makeAppName({port}) {
+	return `app-${port}`;
+}

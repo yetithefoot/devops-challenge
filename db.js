@@ -1,6 +1,6 @@
 const MongoClient = require('mongodb').MongoClient;
-const assert = require('assert');
-const dbName = 'ops-challenge';
+const dbName = 'devops-challenge';
+const collectionName = 'api-calls';
 
 module.exports = async function(dburl) {
 	try {
@@ -9,9 +9,16 @@ module.exports = async function(dburl) {
 		await client.connect();
 
 		console.log('Connected to db');
-		return client.db(dbName);
+		const db = client.db(dbName);
+		return {
+			logRequest: document => {
+				const collection = db.collection(collectionName);
+				return collection.insert(document);
+			}
+		};
 	} catch (err) {
 		console.error('Can not connect to db', err);
 	}
-}
+};
+
 
