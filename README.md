@@ -1,4 +1,4 @@
-Welcome to Pics.io DevOps challenge! Feel free to investigate the repo and do whatever you want, except forking the repo.
+Welcome to DevOps challenge! Feel free to investigate the repo and do whatever you want, except forking the repo.
 
 ## Overview
 Here is a tiny node app that does one simple job — listens for incoming HTTP-requests and writes them all to MongoDB.
