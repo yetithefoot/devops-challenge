@@ -1,4 +1,6 @@
-🎉 Welcome to the DevOps challenge! The repo contains a tiny NodeJS app that listens for incoming HTTP requests and writes related logs to MongoDB. To start the app, the `MONGODB_URL` environment variable is required, HTTP port may be specified as a `port` argument during the app start. 
+🎉 Welcome to the DevOps challenge!
+
+The repo contains a tiny NodeJS app that listens for incoming HTTP requests and writes related logs to MongoDB. To start the app, the `MONGODB_URL` environment variable is required, HTTP port may be specified as a `port` argument during the app start. 
 
 ## Problem
 We want to run an app that handles a high burstable amount of HTTP requests and is easy to scale and monitor.
