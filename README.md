@@ -13,7 +13,7 @@ We want to run an app that handles a high amount (burstable) of HTTP requests an
 
 The proposed solution is just a recommendation, feel free to use any other tool or approach. Do not overengineer things, it's just a test-challenge, a real-world solutions will be different.
 
-## How we score and test
+## How we score
 Deploy the solution to the cloud of your choice, we recommend AWS as our main partner. Provide instructions on deploying and testing the HTTP endpoint, we'll use tools like ApacheBench for load testing. Provide the link to the code repo that we can explore. Provide access to the database. Provide instructions on logs digging.
 We score not just the final technical implementation, but also other aspects: overall decisions made and tool choices, delivery, and communications.  Sure, the proposed solution should be understandable, maintainable, reasonable, performant, secure, composable, and many other important words. But the main goal is that yourself is happy with the solution, and can explain and reason why it made the way, it made. 
 
