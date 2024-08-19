@@ -1,25 +1,23 @@
-🎉Welcome to DevOps challenge! Feel free to investigate the repo and do whatever you want, except forking the repo.
+🎉 Welcome to the DevOps challenge! The repo contains a tiny NodeJS app that listens for incoming HTTP requests and writes related logs to MongoDB. To start the app, the `MONGODB_URL` environment variable is required, HTTP port may be specified as a `port` argument during the app start. 
 
-## Overview
-Here is a tiny node app that does one simple job — listens for incoming HTTP-requests and writes them all to MongoDB.
+## Problem
+We want to run an app that handles a high burstable amount of HTTP requests and is easy to scale and monitor.
 
-To start the app, set `MONGODB_URL` environment variable, pass port as an `port` argument and run `npm start`. You may start as much apps as you want.
+## Proposed solution
+- Deploy and run the app with a plain vanilla Docker (Compose) configuration. Here you have to Docekrize all the components and required dependencies.
+- Run multiple instances of the app and place the network balancer in front of them. nginx or AWS Balancer are alternatives.
+- Collect logs from the apps, balancers, and the database in a unified way in a centralized place. The goal here is the easiest discoverability of the log data during post-mortem.  
+- Define and monitor key infrastructure metrics. We should be notified if something is wrong. A simple email alert is a good choice.  
 
-## What we want
-• Deploy this app and all required dependencies in a easiest way. Docker/compose is a good choice.  
-• Collect logs from app, balancer and database in a unified way in centralized place. Main goal here is to discover logs easily during post-mortem.  
-• Monitor our infrastructure and get notified if something goes probably wrong. Simple email alert is a good choice.  
-• Know which endpoints are used — path and HTTP-response code are enough. 
+The proposed solution is just a recommendation, feel free to use any other tool or approach. Do not overengineer things, it's just a test-challenge, a real-world solutions will be different.
 
-## What you need to do
-• Dockerize an app and run it together with MongoDB via docker-compose.  
-• Run few app versions and setup an nginx-based load balancer.  
-• Collect logs. It should be easy to find, traverse and dig them.    
-• Implement simple APM. When something goes wrong we need to be notified.  
-• Feel free to use any tools you know. Do not overengineer things, it's just a challenge, real solutions will come later.    
+## How we score and test
+Deploy the solution to the cloud of your choice, we recommend AWS as our main partner. Provide instructions on deploying and testing the HTTP endpoint, we'll use tools like ApacheBench for load testing. Provide the link to the code repo that we can explore. Provide access to the database. Provide instructions on logs digging.
+We score not just the final technical implementation, but also other aspects: overall decisions made and tool choices, delivery, and communications.  Sure, the proposed solution should be understandable, maintainable, reasonable, performant, secure, composable, and many other important words. But the main goal is that yourself is happy with the solution, and can explain and reason why it made the way, it made. 
+
 
 ## Before you start
-Read the README.md one more time, take a short break. Write back with the estimation and overview of your solution. When ready, deploy it somewhere that we can touch it live.
+Read the README.md one more time, and take a short break. Then write back to your interviewer with the estimation and a brief description of your solution. When confirmed, start working on that ready, and deploy it somewhere in the cloud so that we can touch it live.
 
 Feel free to ask if you have any questions. Have fun!
 
